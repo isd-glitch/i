@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>設定 - 石田中学校</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .settings-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .settings-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .setting-item label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .setting-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .save-button {
+            background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .save-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>石田中学校</h1>
+        </div>
+        <nav class="nav-tabs">
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="#">お知らせ</a></li>
+                <li><a href="#">学校行事</a></li>
+                <li><a href="bukatu.html">部活動</a></li>
+                <li><a href="time.html">時間割</a></li>
+                <li class="active"><a href="dashboard.html">マイページ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>設定</h2>
+            <p>通知設定やアカウント情報の管理ができます</p>
+        </div>
+    </section>
+
+    <div class="settings-container">
+        <div class="settings-section">
+            <h3>通知設定</h3>
+            <div class="setting-item">
+                <label>お知らせの通知</label>
+                <input type="checkbox" id="notifications" checked>
+            </div>
+            <div class="setting-item">
+                <label>テスト日程の通知</label>
+                <input type="checkbox" id="test-notifications" checked>
+            </div>
+            <div class="setting-item">
+                <label>学校行事の通知</label>
+                <input type="checkbox" id="event-notifications" checked>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3>アカウント設定</h3>
+            <div class="setting-item">
+                <label>メールアドレスの通知</label>
+                <input type="checkbox" id="email-notifications">
+            </div>
+            <div class="setting-item">
+                <label>2段階認証</label>
+                <input type="checkbox" id="two-factor">
+            </div>
+        </div>
+
+        <button class="save-button" onclick="saveSettings()">設定を保存</button>
+    </div>
+
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 石田中学校. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    function saveSettings() {
+        // 設定の保存処理
+        let settings = {
+            notifications: document.getElementById('notifications').checked,
+            testNotifications: document.getElementById('test-notifications').checked,
+            eventNotifications: document.getElementById('event-notifications').checked,
+            emailNotifications: document.getElementById('email-notifications').checked,
+            twoFactor: document.getElementById('two-factor').checked
+        };
+
+        // 通知を表示
+        showNotification('設定の保存', '設定が正常に保存されました');
+    }
+
+    function showNotification(title, message) {
+        if (Notification.permission === "granted") {
+            new Notification(title, {
+                body: message,
+                icon: '/path/to/icon.png'
+            });
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    new Notification(title, {
+                        body: message,
+                        icon: '/path/to/icon.png'
+                    });
+                }
+            });
+        }
+    }
+    </script>
+</body>
+</html>
