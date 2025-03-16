@@ -260,6 +260,22 @@
       background-color: #fff8e6;
       color: #ffb100;
     }
+    
+    .menu a {
+        color: white;          /* リンクの色を白に */
+        text-decoration: none; /* 下線を削除 */
+    }
+    
+    /* 訪問済みリンクも白のままに */
+    .menu a:visited {
+        color: white;
+    }
+    
+    /* ホバー時も白のままに */
+    .menu a:hover {
+        color: white;
+    }
+    
   </style>
   <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
