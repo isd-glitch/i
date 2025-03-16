@@ -82,6 +82,7 @@
                     e.preventDefault();
                 });
             }
+            Notification.requestPermission();
         });
     </script>
     <script>
@@ -100,6 +101,26 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+function showNotification(title, message) {
+    // 通知の許可を確認
+    if (Notification.permission === "granted") {
+        new Notification(title, {
+            body: message,
+            icon: '/path/to/icon.png' // 任意のアイコンパスに変更可能
+        });
+    } else if (Notification.permission !== "denied") {
+        // 通知の許可を要求
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification(title, {
+                    body: message,
+                    icon: '/path/to/icon.png'
+                });
+            }
+        });
+    }
+}
+
 function register() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -109,10 +130,10 @@ function register() {
         password: password
     })
     .then(() => {
-        alert('登録が完了しました');
+        showNotification('登録完了', 'アカウントの登録が完了しました');
     })
     .catch((error) => {
-        alert('エラーが発生しました: ' + error);
+        showNotification('エラー', 'エラーが発生しました: ' + error);
     });
 }
 
@@ -126,14 +147,14 @@ function login() {
         .get()
         .then((querySnapshot) => {
             if (!querySnapshot.empty) {
-                alert('ログイン成功');
+                showNotification('ログイン成功', 'ようこそ' + username + 'さん');
                 window.location.href = 'dashboard.html';
             } else {
-                alert('ユーザー名またはパスワードが間違っています');
+                showNotification('ログインエラー', 'ユーザー名またはパスワードが間違っています');
             }
         })
         .catch((error) => {
-            alert('エラーが発生しました: ' + error);
+            showNotification('エラー', 'エラーが発生しました: ' + error);
         });
 }
 </script>
