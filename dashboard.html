@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>モダンなグレーダッシュボード</title>
+  <title>タブドリ!Live</title>
   <style>
     * {
       margin: 0;
@@ -261,6 +261,8 @@
       color: #ffb100;
     }
   </style>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <div class="dashboard">
@@ -289,7 +291,7 @@
         </div>
         <div class="user-profile">
           <div class="user-avatar">AT</div>
-          <span>山田太郎</span>
+          <span id="username-display"></span>
         </div>
       </div>
       
@@ -373,5 +375,32 @@
       </div>
     </div>
   </div>
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyA3a8TxJLcK8p0-QYQOX4HQ8e92cd2l4-8",
+        authDomain: "roguin-6e06f.firebaseapp.com",
+        projectId: "roguin-6e06f",
+        storageBucket: "roguin-6e06f.firebasestorage.app",
+        messagingSenderId: "670369790316",
+        appId: "1:670369790316:web:1b03e4d2e5af2b030bdb49",
+        measurementId: "G-VSXZBBRLTE"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ログインしているユーザー名を取得して表示
+    document.addEventListener('DOMContentLoaded', function() {
+        // ローカルストレージからユーザー名を取得
+        const username = localStorage.getItem('currentUser');
+        if (username) {
+            document.getElementById('username-display').textContent = username;
+        } else {
+            // ユーザーが未ログインの場合はログインページにリダイレクト
+            window.location.href = 'login.html';
+        }
+    });
+  </script>
 </body>
 </html>
