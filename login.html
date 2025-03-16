@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <h1>Login & Registration</h1>
+    <div>
+        <h2>Register</h2>
+        <form id="registerForm">
+            <input type="text" id="registerUsername" placeholder="Username" required>
+            <input type="password" id="registerPassword" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3a8TxJLcK8p0-QYQOX4HQ8e92cd2l4-8",
+            authDomain: "roguin-6e06f.firebaseapp.com",
+            projectId: "roguin-6e06f",
+            storageBucket: "roguin-6e06f.firebasestorage.app",
+            messagingSenderId: "670369790316",
+            appId: "1:670369790316:web:1b03e4d2e5af2b030bdb49",
+            measurementId: "G-VSXZBBRLTE"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Register user
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            try {
+                await db.collection('users').doc(username).set({ password });
+                alert('User registered successfully!');
+            } catch (error) {
+                console.error('Error registering user:', error);
+                alert('Error registering user.');
+            }
+        });
+
+        // Login user
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const userDoc = await db.collection('users').doc(username).get();
+                if (userDoc.exists && userDoc.data().password === password) {
+                    alert('Login successful!');
+                } else {
+                    alert('Invalid username or password.');
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+                alert('Error logging in.');
+            }
+        });
+    </script>
+</body>
+</html>
