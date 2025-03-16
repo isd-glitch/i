@@ -12,12 +12,14 @@ body {
   line-height: 1.6;
   width: 100%;
   overflow-x: hidden; /* 横スクロールを防止 */
+  padding: 0 2rem; /* 左右の余白を調整 */
 }
 
 section {
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto; /* 中央揃えのために追加 */
+  padding: 0 2rem; /* セクションの左右の余白を調整 */
 }
 
 /* ヘッダーとナビゲーション */
