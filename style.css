@@ -12,20 +12,20 @@ body {
   line-height: 1.6;
   width: 100%;
   overflow-x: hidden; /* 横スクロールを防止 */
-  padding: 0 2rem; /* 左右の余白を調整 */
+  padding: 0; /* 左右の余白を調整 */
 }
 
 section {
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto; /* 中央揃えのために追加 */
-  padding: 0 2rem; /* セクションの左右の余白を調整 */
+  padding: 0; /* セクションの左右の余白を調整 */
 }
 
 /* ヘッダーとナビゲーション */
 header {
   background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
-  padding: 1rem 5%;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,6 +33,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .logo h1 {
@@ -40,12 +41,14 @@ header {
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 1px;
+  padding: 0 2rem;
 }
 
 .nav-tabs ul {
   display: flex;
   list-style-type: none;
   flex-wrap: wrap;
+  padding: 0 2rem;
 }
 
 .nav-tabs li {
@@ -80,6 +83,7 @@ header {
   text-align: center;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .hero:before {
@@ -133,8 +137,8 @@ header {
 .recent-materials {
   padding: 4rem 0;
   width: 100%;
-  max-width: 1400px; /* 最大幅を設定 */
-  margin: 0 auto; /* 中央揃えのために追加 */
+  margin: 0; /* 中央揃えを削除 */
+  max-width: none; /* 最大幅の制限を削除 */
 }
 
 .news h2,
@@ -167,10 +171,10 @@ header {
 .tips-container,
 .subject-grid,
 .materials-grid {
-  padding: 0 5%;
-  width: 100%; /* 幅を100%に設定 */
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 2rem;
   gap: 1.5rem;
 }
 
@@ -181,7 +185,8 @@ header {
   justify-content: center;
   gap: 2rem;
   background-color: white;
-  padding: 4rem 5%;
+  padding: 4rem 2rem;
+  width: 100%;
 }
 
 .feature-card {
@@ -439,6 +444,7 @@ footer {
 /* ページヘッダー（study.htmlなど） */
 .page-header {
   background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
+  width: 100%;
   padding: 2rem 0;
   text-align: center;
   color: white;
