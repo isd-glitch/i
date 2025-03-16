@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>時間割 - 石田中学校 生徒ポータル</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* 時間割ページ特有のスタイル */
+      .timetable-container {
+        padding: 2rem 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timetable-tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .timetable-tab {
+        padding: 0.8rem 1.5rem;
+        margin: 0 0.5rem 0.5rem;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .timetable-tab.active {
+        background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+        color: white;
+      }
+
+      .timetable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .timetable th,
+      .timetable td {
+        border: 1px solid #e0e0e0;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .timetable th {
+        background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
+        color: white;
+        font-weight: 500;
+      }
+
+      .timetable tr:nth-child(odd) {
+        background-color: #f9f9f9;
+      }
+
+      .timetable .period {
+        background: linear-gradient(135deg, #5162ff 0%, #3a4ccc 100%);
+        color: white;
+        font-weight: 500;
+      }
+
+      .notes {
+        background-color: #f0f5ff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+
+      .notes h3 {
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .notes ul {
+        list-style-type: none;
+        padding-left: 1rem;
+      }
+
+      .notes li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .notes li:before {
+        content: "•";
+        color: #5162ff;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: -0.5rem;
+      }
+
+      .schedule-section {
+        margin-top: 4rem;
+      }
+
+      .schedule-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .schedule-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .schedule-date {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .schedule-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .schedule-card p {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      @media (max-width: 768px) {
+        .timetable {
+          font-size: 0.85rem;
+        }
+
+        .timetable th,
+        .timetable td {
+          padding: 0.6rem 0.3rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .timetable-container {
+          padding: 1rem;
+          overflow-x: auto;
+        }
+
+        .timetable {
+          min-width: 480px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>石田中学校</h1>
+      </div>
+      <nav class="nav-tabs">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="#">お知らせ</a></li>
+          <li><a href="#">学校行事</a></li>
+          <li><a href="#">部活動</a></li>
+          <li class="active"><a href="time.html">時間割</a></li>
+          <li><a href="#">生徒はこちら</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h2>時間割</h2>
+        <p>
+          学年・クラス別の時間割や重要な行事スケジュールをご確認いただけます。
+        </p>
+        <button class="cta-button">テスト日程はこちら</button>
+      </div>
+    </section>
+
+    <div class="timetable-container">
+      <div class="timetable-tabs">
+        <div class="timetable-tab active">1年1組</div>
+        <div class="timetable-tab">1年2組</div>
+        <div class="timetable-tab">1年3組</div>
+        <div class="timetable-tab">2年</div>
+        <div class="timetable-tab">3年</div>
+      </div>
+
+      <table class="timetable">
+        <thead>
+          <tr>
+            <th>時限</th>
+            <th>月曜日</th>
+            <th>火曜日</th>
+            <th>水曜日</th>
+            <th>木曜日</th>
+            <th>金曜日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="period">1時限<br />8:30-9:20</td>
+            <td>国語</td>
+            <td>数学</td>
+            <td>英語</td>
+            <td>社会</td>
+            <td>理科</td>
+          </tr>
+          <tr>
+            <td class="period">2時限<br />9:30-10:20</td>
+            <td>数学</td>
+            <td>英語</td>
+            <td>理科</td>
+            <td>国語</td>
+            <td>体育</td>
+          </tr>
+          <tr>
+            <td class="period">3時限<br />10:30-11:20</td>
+            <td>社会</td>
+            <td>理科</td>
+            <td>数学</td>
+            <td>英語</td>
+            <td>音楽</td>
+          </tr>
+          <tr>
+            <td class="period">4時限<br />11:30-12:20</td>
+            <td>体育</td>
+            <td>国語</td>
+            <td>社会</td>
+            <td>美術</td>
+            <td>国語</td>
+          </tr>
+          <tr>
+            <td colspan="6" style="background-color: #f0f0f0">
+              昼休み 12:20-13:10
+            </td>
+          </tr>
+          <tr>
+            <td class="period">5時限<br />13:10-14:00</td>
+            <td>英語</td>
+            <td>美術</td>
+            <td>体育</td>
+            <td>数学</td>
+            <td>社会</td>
+          </tr>
+          <tr>
+            <td class="period">6時限<br />14:10-15:00</td>
+            <td>音楽</td>
+            <td>技術</td>
+            <td>家庭</td>
+            <td>理科</td>
+            <td>総合</td>
+          </tr>
+          <tr>
+            <td class="period">放課後<br />15:20-</td>
+            <td colspan="5">部活動・委員会活動など</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notes">
+        <h3>時間割についての注意事項</h3>
+        <ul>
+          <li>
+            時間割は変更になる場合があります。最新情報は教室の掲示板をご確認ください。
+          </li>
+          <li>木曜日の6時限目は隔週で特別活動の時間に変更となります。</li>
+          <li>
+            体育の授業は、季節や天候によって内容が変更になる場合があります。
+          </li>
+          <li>
+            教科書や準備物については各教科担当の先生の指示に従ってください。
+          </li>
+        </ul>
+      </div>
+
+      <div class="schedule-section">
+        <h2>今後の主要スケジュール</h2>
+        <div class="schedule-card">
+          <div class="schedule-date">2025/3/18-20</div>
+          <h4>1学期中間テスト</h4>
+          <p>
+            全学年対象の定期テストです。範囲については各教科の先生からの指示を確認してください。
+          </p>
+        </div>
+        <div class="schedule-card">
+          <div class="schedule-date">2025/4/5</div>
+          <h4>授業参観日</h4>
+          <p>
+            保護者の方を対象とした授業参観が行われます。時間割は通常と同じです。
+          </p>
+        </div>
+        <div class="schedule-card">
+          <div class="schedule-date">2025/4/15-16</div>
+          <h4>校外学習</h4>
+          <p>
+            1年生は科学博物館、2年生は歴史資料館、3年生は職業体験に行きます。
+          </p>
+        </div>
+        <div class="schedule-card">
+          <div class="schedule-date">2025/5/10-13</div>
+          <h4>1学期期末テスト</h4>
+          <p>
+            全学年対象の定期テストです。範囲については各教科の先生からの指示を確認してください。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-info">
+          <h3>石田中学校</h3>
+          <p>〒123-4567 東京都○○区△△町1-2-3</p>
+          <p>TEL: 03-1234-5678</p>
+          <p>Email: info@ishida-jhs.ed.jp</p>
+        </div>
+        <div class="footer-links">
+          <h4>クイックリンク</h4>
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="#">お知らせ</a></li>
+            <li><a href="#">学校行事</a></li>
+            <li><a href="bukatu.html">部活動</a></li>
+            <li><a href="time.html">時間割</a></li>
+            <li><a href="study.html">学習コンテンツ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 石田中学校. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // タブ切り替え機能
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".timetable-tab");
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            // アクティブクラスをすべて削除
+            tabs.forEach((t) => t.classList.remove("active"));
+            // クリックされたタブにアクティブクラスを追加
+            this.classList.add("active");
+
+            // 実際のアプリケーションでは、ここで対応する時間割データを読み込む処理を追加
+            // 今回はデモなので見た目の変更のみ
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

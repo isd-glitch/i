@@ -1,0 +1,490 @@
+/* ベースリセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden; /* 横スクロールを防止 */
+}
+
+section {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto; /* 中央揃えのために追加 */
+}
+
+/* ヘッダーとナビゲーション */
+header {
+  background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo h1 {
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.nav-tabs ul {
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.nav-tabs li {
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+.nav-tabs li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.8rem 1rem;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s ease;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.nav-tabs li.active a,
+.nav-tabs li a:hover {
+  background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+  color: white;
+}
+
+/* ヒーローセクション */
+.hero {
+  background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 79, 126, 0.8) 0%,
+    rgba(81, 98, 255, 0.8) 100%
+  );
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 2rem;
+  z-index: 2;
+  color: white;
+  margin: 0 auto; /* 中央揃えのために追加 */
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(81, 98, 255, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 15px rgba(81, 98, 255, 0.4);
+}
+
+/* 共通のセクションスタイル */
+.features,
+.news,
+.study-tips,
+.useful-websites,
+.subject-categories,
+.recent-materials {
+  padding: 4rem 0;
+  width: 100%;
+  max-width: 1400px; /* 最大幅を設定 */
+  margin: 0 auto; /* 中央揃えのために追加 */
+}
+
+.news h2,
+.useful-websites h2,
+.subject-categories h2,
+.recent-materials h2,
+.study-tips h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  position: relative;
+  padding: 0 5%;
+}
+
+.news h2:after,
+.useful-websites h2:after,
+.study-tips h2:after {
+  /* 下線を追加 */
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+  margin: 0.8rem auto 0;
+}
+
+/* グリッドレイアウト共通 */
+.news-grid,
+.websites-grid,
+.tips-container,
+.subject-grid,
+.materials-grid {
+  padding: 0 5%;
+  width: 100%; /* 幅を100%に設定 */
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+
+/* 特徴セクション */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  background-color: white;
+  padding: 4rem 5%;
+}
+
+.feature-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  text-decoration: none; /* リンクの下線を削除 */
+  color: inherit; /* 親要素の色を継承 */
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* ニュースセクション */
+.news {
+  background-color: #f7f7f7;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.news-item {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-5px);
+}
+
+.news-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.news-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.news-item p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* 効果的な学習のコツ セクション */
+.study-tips {
+  background: linear-gradient(135deg, #ff4f7e 0%, #5162ff 100%);
+  color: white;
+  width: 100%; /* 幅を100%に設定 */
+}
+
+.study-tips h2 {
+  color: white;
+}
+
+.study-tips h2:after {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.tip {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tip:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tip h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.tip p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 役立つウェブサイトセクション */
+.useful-websites {
+  background-color: #f0f5ff;
+  width: 100%; /* 幅を100%に設定 */
+}
+
+.websites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.website-item {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.website-item:hover {
+  transform: translateY(-5px);
+}
+
+.website-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.website-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.website-item p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.website-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #5162ff 0%, #3a4ccc 100%);
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.website-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(81, 98, 255, 0.3);
+}
+
+/* フッター */
+footer {
+  background: #2b2b2b;
+  color: white;
+  padding: 3rem 5% 1.5rem;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  max-width: 1400px; /* 最大幅を設定 */
+  margin: 0 auto; /* 中央揃え */
+}
+
+.footer-info {
+  flex: 2;
+  min-width: 250px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.footer-info p {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.footer-links {
+  flex: 1;
+  min-width: 150px;
+}
+
+.footer-links h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: white;
+  opacity: 0.8;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  opacity: 0.7;
+  max-width: 1400px; /* 最大幅を設定 */
+  margin: 0 auto; /* 中央揃え */
+}
+
+/* ページヘッダー（study.htmlなど） */
+.page-header {
+  background: linear-gradient(135deg, #2b2b2b 0%, #3a3a3a 100%);
+  padding: 2rem 0;
+  text-align: center;
+  color: white;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .nav-tabs ul {
+    justify-content: center;
+  }
+
+  .nav-tabs li {
+    margin: 0.25rem;
+  }
+
+  .hero-content h2 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .features,
+  .news,
+  .study-tips,
+  .useful-websites,
+  .subject-categories,
+  .recent-materials {
+    padding: 3rem 1rem;
+  }
+
+  .news-grid,
+  .tips-container,
+  .websites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+}
