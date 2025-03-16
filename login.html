@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
+<html lang="ja">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
 
-<script>
+    <script>
 const firebaseConfig = {
     // Your Firebase config here
     apiKey: "AIzaSyA3a8TxJLcK8p0-QYQOX4HQ8e92cd2l4-8",
@@ -88,9 +90,26 @@ function login() {
     <section class="hero">
       <div class="hero-content">
         <h2>生徒ログイン</h2>
-        <p>学習コンテンツやテスト情報にアクセスするにはログインが必要です</p>
-      </div>
     </section>
+
+    <div class="login-form">
+        <form>
+            <div class="form-group">
+                <label for="username">ユーザー名:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">パスワード:</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-buttons">
+                <button type="button" onclick="login()">ログイン</button>
+                <button type="button" onclick="register()">新規登録</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
 
     <footer>
       <div class="copyright">
