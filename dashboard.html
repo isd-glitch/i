@@ -304,8 +304,8 @@
           </div>
         </div>
         <div class="widget">
-          <div class="widget-title">新規ユーザー</div>
-          <div class="widget-value">1,243</div>
+          <div class="widget-title">登録されたユーザー数</div>
+            <div class="widget-value">1</div>
           <div class="widget-footer">
             <span>↑ 8.3%</span> 先月比
           </div>
@@ -390,16 +390,29 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // ログインしているユーザー名を取得して表示
+    // ユーザー数を監視する関数
+    function watchUserCount() {
+        // usersコレクションへのリアルタイムリスナーを設定
+        db.collection('users').onSnapshot((snapshot) => {
+            const userCount = snapshot.size;
+            document.querySelector('.widget:nth-child(2) .widget-value').textContent = userCount + '人';
+        }, (error) => {
+            console.error('Error watching user count:', error);
+        });
+    }
+
+    // ページ読み込み時の処理
     document.addEventListener('DOMContentLoaded', function() {
-        // ローカルストレージからユーザー名を取得
+        // ユーザー名の取得と表示
         const username = localStorage.getItem('currentUser');
         if (username) {
             document.getElementById('username-display').textContent = username;
         } else {
-            // ユーザーが未ログインの場合はログインページにリダイレクト
             window.location.href = 'login.html';
         }
+
+        // ユーザー数の監視を開始
+        watchUserCount();
     });
   </script>
 </body>
