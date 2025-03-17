@@ -313,10 +313,21 @@
       
       <div class="widget-container">
         <div class="widget">
-          <div class="widget-title">総売上</div>
-          <div class="widget-value">¥8,543,210</div>
+            <div class="widget-title">アクティブユーザー</div>
+            <div class="widget-value" id="active-users">0人</div>
           <div class="widget-footer">
-            <span>↑ 12.5%</span> 先月比
+            <span id="active-users-change"></span>
+            <script>
+              // アクティブユーザーの監視
+              db.collection('activeUsers').onSnapshot((snapshot) => {
+                const activeCount = snapshot.size;
+                document.getElementById('active-users').textContent = activeCount + '人';
+                
+                // 先月との比較（この部分は実際のデータに基づいて計算する必要があります）
+                const change = '+0%';
+                document.getElementById('active-users-change').textContent = `${change} 先月比`;
+              });
+            </script>
           </div>
         </div>
         <div class="widget">
