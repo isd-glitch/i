@@ -320,6 +320,13 @@
                 } else if (iframe.msRequestFullscreen) { // IE/Edge
                     iframe.msRequestFullscreen();
                 }
+                iframe.focus(); // フルスクリーン時にiframeにフォーカスを設定
+            });
+
+            // ページ読み込み時にiframeにフォーカスを設定
+            document.addEventListener('DOMContentLoaded', function() {
+                const iframe = document.getElementById('game-frame');
+                iframe.focus();
             });
         </script>
     </div>
