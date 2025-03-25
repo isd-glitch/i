@@ -309,6 +309,26 @@
         </div>
 
         <script>
+            const iframe = document.getElementById('game-frame');
+            iframe.addEventListener('click', () => {
+                iframe.focus();
+            });
+
+            document.getElementById('fullscreen-btn').addEventListener('click', function() {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) { // Firefox
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { // IE/Edge
+                    iframe.msRequestFullscreen();
+                }
+                iframe.focus(); // フルスクリーン時にフォーカスを設定
+            });
+        </script>
+
+        <script>
             document.getElementById('fullscreen-btn').addEventListener('click', function() {
                 const iframe = document.getElementById('game-frame');
                 if (iframe.requestFullscreen) {

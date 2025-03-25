@@ -309,8 +309,12 @@
         </div>
 
         <script>
+            const iframe = document.getElementById('game-frame');
+            iframe.addEventListener('click', () => {
+                iframe.focus();
+            });
+
             document.getElementById('fullscreen-btn').addEventListener('click', function() {
-                const iframe = document.getElementById('game-frame');
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen();
                 } else if (iframe.mozRequestFullScreen) { // Firefox
@@ -320,7 +324,7 @@
                 } else if (iframe.msRequestFullscreen) { // IE/Edge
                     iframe.msRequestFullscreen();
                 }
-                iframe.focus(); // フルスクリーン時にiframeにフォーカスを設定
+                iframe.focus(); // フルスクリーン時にフォーカスを設定
             });
 
             // ページ読み込み時にiframeにフォーカスを設定
