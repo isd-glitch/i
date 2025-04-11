@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="aikon.png" type="image/png">
+  <title>タブドリ!Live</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f2f5;
+      color: #333;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      height: 100vh;
+    }
+    
+    .sidebar {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      height: 100%;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+    
+    .menu {
+      list-style: none;
+    }
+    
+    .menu li {
+      margin-bottom: 5px;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .menu li:hover, .menu li.active {
+      background-color: #4a4a4a;
+    }
+    
+    .menu li.active {
+      border-left: 3px solid #5d9cec;
+    }
+    
+    .menu-icon {
+      margin-right: 10px;
+      opacity: 0.7;
+    }
+    
+    .main-content {
+      padding: 30px;
+      overflow-y: auto;
+    }
+    
+    .header {
+      display: flex;
+      .menu a { color: white; text-decoration: none; }
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .search-bar {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 8px 15px;
+      width: 300px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      margin-left: 10px;
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #5d9cec;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .widget-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .widget {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .widget-title {
+      font-size: 14px;
+      color: #888;
+    }
+    
+    .widget-value {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .widget-footer {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+    }
+    
+    .widget-footer span {
+      margin-left: 5px;
+    }
+    
+    .chart-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+    
+    .chart {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .chart-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .chart-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .chart-actions button {
+      background-color: #f0f2f5;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .chart-actions button.active {
+      background-color: #5d9cec;
+      color: white;
+    }
+    
+    .chart-content {
+      height: 300px;
+      position: relative;
+    }
+    
+    .chart-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+    }
+    
+    .chart-bar {
+      flex: 1;
+      margin: 0 5px;
+      background-color: #5d9cec;
+      border-radius: 3px 3px 0 0;
+      position: relative;
+    }
+    
+    .chart-bar::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #888;
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table th, .table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .table th {
+      font-weight: normal;
+      color: #888;
+      font-size: 12px;
+    }
+    
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+    
+    .status.active {
+      background-color: #e6f7ee;
+      color: #00a389;
+    }
+    
+    .status.pending {
+      background-color: #fff8e6;
+      color: #ffb100;
+    }
+    
+    .menu a {
+        color: white;          /* リンクの色を白に */
+        text-decoration: none; /* 下線を削除 */
+    }
+    
+    /* 訪問済みリンクも白のままに */
+    .menu a:visited {
+        color: white;
+    }
+    
+    /* ホバー時も白のままに */
+    .menu a:hover {
+        color: white;
+    }
+    
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <div class="logo">DASHBOARD</div>
+      <ul class="menu">
+        <li><span class="menu-icon">◆</span><a href="dashboard.html"> ダッシュボード</a></li>
+        <li><span class="menu-icon">◆</span> <a href="youtube.html">youtube</a></li>
+        <li><span class="menu-icon">◆</span> <a href="index.html">ほーむ</a></li>
+        <li><span class="menu-icon">◆</span> <a href="mine.html">マイクラ1.8</a></li>
+        <li><span class="menu-icon">◆</span> <a href="mine112.html">マイクラ1.12</a></li>
+        <li><span class="menu-icon">◆</span> <a href="tetris.html">テトリスオフライン</a></li>
+        <li><span class="menu-icon">◆</span> <a href="tetrisonline.html">テトリスオンライン</a></li>
+        <li><span class="menu-icon">◆</span> <a href="1v1lol.html">1v1lol</a></li>
+        <li><span class="menu-icon">◆</span> <a href="taiko.html">太鼓の達人</a></li>
+        <li><span class="menu-icon">◆</span> <a href="line.html">LINE</a></li>
+        <li><span class="menu-icon">◆</span> <a href="proxy.html">プロキシ</a></li>
+        <li><span class="menu-icon">◆</span> <a href="dash.html">ダッシュ</a></li>
+        <li><span class="menu-icon">◆</span> <a href="mario.html">マリオ</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+        <div class="game-container"></div>
+            <iframe id="game-frame" src="https://isd-glitch.github.io/1v1lol/" frameborder="0" style="width: 100%; height: 80vh; border-radius: 10px;" allow="clipboard-read; clipboard-write; fullscreen; gamepad; keyboard; mouse;"></iframe>
+            <button id="fullscreen-btn" style="margin-top: 10px; padding: 10px 20px; background-color: #5d9cec; color: white; border: none; border-radius: 5px; cursor: pointer;">全画面</button>
+        </div>
+
+        <script>
+            const iframe = document.getElementById('game-frame');
+            iframe.addEventListener('click', () => {
+                iframe.focus();
+            });
+
+            document.getElementById('fullscreen-btn').addEventListener('click', function() {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) { // Firefox
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { // IE/Edge
+                    iframe.msRequestFullscreen();
+                }
+                iframe.focus(); // フルスクリーン時にフォーカスを設定
+            });
+        </script>
+
+        <script>
+            document.getElementById('fullscreen-btn').addEventListener('click', function() {
+                const iframe = document.getElementById('game-frame');
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) { // Firefox
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { // IE/Edge
+                    iframe.msRequestFullscreen();
+                }
+            });
+        </script>
+    </div>
+      
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyA3a8TxJLcK8p0-QYQOX4HQ8e92cd2l4-8",
+        authDomain: "roguin-6e06f.firebaseapp.com",
+        projectId: "roguin-6e06f",
+        storageBucket: "roguin-6e06f.firebasestorage.app",
+        messagingSenderId: "670369790316",
+        appId: "1:670369790316:web:1b03e4d2e5af2b030bdb49",
+        measurementId: "G-VSXZBBRLTE"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ユーザー数を監視する関数
+    function watchUserCount() {
+        // usersコレクションへのリアルタイムリスナーを設定
+        db.collection('users').onSnapshot((snapshot) => {
+            const userCount = snapshot.size;
+            document.querySelector('.widget:nth-child(2) .widget-value').textContent = userCount + '人';
+        }, (error) => {
+            console.error('Error watching user count:', error);
+        });
+    }
+
+    // ページ読み込み時の処理
+    document.addEventListener('DOMContentLoaded', function() {
+        // ユーザー名の取得と表示
+        const username = localStorage.getItem('currentUser');
+        if (username) {
+            document.getElementById('username-display').textContent = username;
+        } else {
+            window.location.href = 'login.html';
+        }
+
+        // ユーザー数の監視を開始
+        watchUserCount();
+    });
+  </script>
+</body>
+</html>
