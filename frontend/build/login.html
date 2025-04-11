@@ -150,7 +150,7 @@ function login() {
                 // ログイン成功時にユーザー名をローカルストレージに保存
                 localStorage.setItem('currentUser', username);
                 showNotification('ログイン成功', 'ようこそ' + username + 'さん');
-                window.location.href = 'dashboard.html';
+                window.location.href = 'kaba.html';
             } else {
                 showNotification('ログインエラー', 'ユーザー名またはパスワードが間違っています');
             }
