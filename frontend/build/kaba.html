@@ -81,7 +81,7 @@
     </div>
 
     <div class="dashboard" style="display:none;">
-        <iframe src="dashboard.html.html" class="sidebar" scrolling="no"></iframe>
+        <iframe src="sidebar.html" class="sidebar" scrolling="no"></iframe>
         <div class="main-content">
             <!-- Main content goes here -->
         </div>
@@ -92,12 +92,9 @@
             event.preventDefault();
             const password = document.getElementById('password').value;
             const error = document.getElementById('error');
-            const formContainer = document.querySelector('.form-container');
-            const dashboard = document.querySelector('.dashboard');
 
             if (password === 'kabao') {
-                formContainer.style.display = 'none';
-                dashboard.style.display = 'flex';
+                window.location.href = 'dashboard.html';
             } else {
                 error.style.display = 'block';
             }
